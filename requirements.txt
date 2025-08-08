@@ -1,0 +1,19 @@
+# Core dependencies
+requests>=2.28.0
+flask>=2.2.0
+flask-cors>=3.0.10
+python-dateutil>=2.8.0
+
+# Optional dependencies for enhanced features
+flask-limiter>=2.1.0  # Rate limiting
+flask-login>=0.6.0    # User authentication
+stripe>=5.0.0         # Payment processing
+redis>=4.0.0          # Caching and sessions
+celery>=5.2.0         # Background tasks
+gunicorn>=20.1.0      # Production WSGI server
+
+# Development dependencies
+pytest>=7.0.0
+black>=22.0.0
+flake8>=4.0.0
+pre-commit>=2.17.0
