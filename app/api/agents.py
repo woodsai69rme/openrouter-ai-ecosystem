@@ -60,10 +60,30 @@ def list_agents():
 def get_status():
     """Get system status"""
     init_agent_system()
-    status = agent_system.get_system_status()
-    return jsonify({
-        'agents': len(status.agents),
-        'tasks': status.system_stats.total_tasks,
-        'completed': status.system_stats.completed_tasks,
-        'cost': 0.00
-    })
+    try:
+        status = agent_system.get_system_status()
+        # Handle different status return formats
+        if hasattr(status, 'agents'):
+            agents_count = len(status.agents)
+            total_tasks = status.system_stats.total_tasks if hasattr(status, 'system_stats') else 0
+            completed_tasks = status.system_stats.completed_tasks if hasattr(status, 'system_stats') else 0
+        else:
+            # Fallback for dict-based status
+            agents_count = len(status.get('agents', {}))
+            total_tasks = status.get('system_stats', {}).get('total_tasks', 0)
+            completed_tasks = status.get('system_stats', {}).get('completed_tasks', 0)
+        
+        return jsonify({
+            'agents': agents_count,
+            'tasks': total_tasks,
+            'completed': completed_tasks,
+            'cost': 0.00
+        })
+    except Exception as e:
+        return jsonify({
+            'agents': 0,
+            'tasks': 0,
+            'completed': 0,
+            'cost': 0.00,
+            'error': str(e)
+        })

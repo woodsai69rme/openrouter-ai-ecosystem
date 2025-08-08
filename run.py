@@ -22,20 +22,20 @@ def main():
     app = create_app(config)
     
     # Print startup info
-    print("🚀 OpenRouter AI Multi-Agent System")
+    print("OpenRouter AI Multi-Agent System")
     print("=" * 50)
-    print("💰 Monetization Features:")
+    print("Monetization Features:")
     print("  - Free tier with limits")
     print("  - Pro tier ($29/month)")
     print("  - Enterprise tier ($299/month)")
     print("  - Stripe payment integration")
     print()
-    print("🌐 Starting server...")
+    print("Starting server...")
     print("  Landing page: http://localhost:5000")
     print("  Dashboard: http://localhost:5000/dashboard")
     print("  API: http://localhost:5000/api")
     print()
-    print("💡 Ready for production deployment!")
+    print("Ready for production deployment!")
     
     # Run the app
     app.run(
