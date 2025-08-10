@@ -1,0 +1,13 @@
+{
+  "name": "solodash-deploy",
+  "version": "1.0.0",
+  "description": "SOLODASH - Dashboard Management System",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'Static build complete'",
+    "start": "echo 'Static site ready'"
+  },
+  "keywords": ["dashboard", "management", "qa", "testing"],
+  "author": "SOLO Coding",
+  "license": "MIT"
+}
