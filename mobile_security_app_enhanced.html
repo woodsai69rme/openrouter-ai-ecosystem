@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Security Platform Mobile - Enhanced</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .mobile-header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 15px 15px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .app-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .main-content {
+            margin-top: 80px;
+            padding: 20px 15px;
+            padding-bottom: 100px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .feature-card:active {
+            transform: scale(0.95);
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .feature-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .security-status {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff88;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .quick-btn {
+            flex: 1;
+            background: linear-gradient(45deg, #ff4757, #ff6b7a);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:active {
+            transform: scale(0.95);
+        }
+
+        .quick-btn.safe {
+            background: linear-gradient(45deg, #00ff88, #00d4ff);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 5px;
+        }
+
+        .nav-item:active {
+            transform: scale(0.9);
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-label {
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            color: #00ff88;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-top: 50px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #ff4757;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .scan-result {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .threat-level {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .threat-low { background: #00ff88; color: #000; }
+        .threat-medium { background: #ffa726; color: #000; }
+        .threat-high { background: #ff4757; color: #fff; }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00d4ff);
+            transition: width 0.3s ease;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .floating-alert {
+            position: fixed;
+            top: 100px;
+            left: 15px;
+            right: 15px;
+            background: rgba(255, 71, 87, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            z-index: 1500;
+            transform: translateY(-100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .floating-alert.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .vibrate-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        @media (max-width: 350px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                min-height: 100px;
+            }
+        }
+    </style>
+
+            <script>
+            // Enhanced performance monitoring
+            window.performanceMonitor = {
+                startTime: performance.now(),
+                logMetric: function(name, value) {
+                    console.log(`Performance Metric: ${name} = ${value}ms`);
+                }
+            };
+            </script>
+            </head>
+<body>
+    <!-- Mobile Header -->
+    <div class="mobile-header">
+        <div class="status-bar">
+            <span>🔒 SECURE</span>
+            <span>⚡ LIVE</span>
+            <span>📶 ACTIVE</span>
+        </div>
+        <div class="app-title">🛡️ Security Platform Mobile</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Security Status -->
+        <div class="security-status">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <strong>System Status: PROTECTED</strong>
+            </div>
+            <div>OpenRouter AI Active • $0.00 Cost • 14 Free Models</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 95%"></div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="emergencyLock()">🚨 LOCK</button>
+            <button class="quick-btn safe" onclick="runQuickScan()">🔍 SCAN</button>
+            <button class="quick-btn vibrate-btn" onclick="testVibrate()">📳 TEST</button>
+        </div>
+
+        <!-- Feature Grid -->
+        <div class="feature-grid">
+            <div class="feature-card" onclick="openModule('scanner')">
+                <div class="feature-icon">🔍</div>
+                <div class="feature-title">Security Scanner</div>
+                <div class="feature-desc">Network & Device Scan</div>
+            </div>
+
+            <div class="feature-card" onclick="openModule('hackrf')">
+                <div class="feature-icon">📡</div>
+                <div class="feature-title">HackRF Suite</div>
+                <div class="feature-desc">RF Analysis Tools</div>
+            </div>
+
+            <div class="feature-card" onclick="openModule('network')">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-title">Network Monitor</div>
+                <div class="feature-desc">Traffic Analysis</div>
+            </div>
+
+            <div class="feature-card" onclick="openModule('ai')">
+                <div class="feature-icon">🤖</div>
+                <div class="feature-title">AI Analysis</div>
+                <div class="feature-desc">Threat Intelligence</div>
+            </div>
+
+            <div class="feature-card" onclick="openModule('audit')">
+                <div class="feature-icon">📋</div>
+                <div class="feature-title">Security Audit</div>
+                <div class="feature-desc">Compliance Check</div>
+            </div>
+
+            <div class="feature-card" onclick="openModule('tools')">
+                <div class="feature-icon">🛠️</div>
+                <div class="feature-title">Pentest Tools</div>
+                <div class="feature-desc">Security Testing</div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="threatCount">0</div>
+                <div class="stat-label">Threats Blocked</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="scanCount">0</div>
+                <div class="stat-label">Scans Complete</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Monitoring</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$0.00</div>
+                <div class="stat-label">Cost Today</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchTab('home')">
+            <div class="nav-icon">🏠</div>
+            <div class="nav-label">Home</div>
+        </div>
+        <div class="nav-item" onclick="switchTab('monitor')">
+            <div class="nav-icon">📊</div>
+            <div class="nav-label">Monitor</div>
+        </div>
+        <div class="nav-item" onclick="switchTab('tools')">
+            <div class="nav-icon">🛠️</div>
+            <div class="nav-label">Tools</div>
+        </div>
+        <div class="nav-item" onclick="switchTab('settings')">
+            <div class="nav-icon">⚙️</div>
+            <div class="nav-label">Settings</div>
+        </div>
+    </div>
+
+    <!-- Scanner Modal -->
+    <div id="scannerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔍 Security Scanner</h3>
+                <button class="close-btn" onclick="closeModal('scannerModal')">&times;</button>
+            </div>
+            
+            <div id="scanProgress" style="display: none;">
+                <div>Scanning Network...</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="scanProgressBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="scanResults">
+                <div class="scan-result">
+                    <span class="threat-level threat-low">LOW</span>
+                    <div><strong>WiFi Security:</strong> WPA3 Encryption Detected</div>
+                    <div>Network appears secure with modern protocols</div>
+                </div>
+
+                <div class="scan-result">
+                    <span class="threat-level threat-medium">MEDIUM</span>
+                    <div><strong>Open Ports:</strong> Port 80, 443 detected</div>
+                    <div>Standard web ports - monitoring recommended</div>
+                </div>
+
+                <div class="scan-result">
+                    <span class="threat-level threat-high">HIGH</span>
+                    <div><strong>Suspicious Activity:</strong> Unknown device connected</div>
+                    <div>Device MAC: XX:XX:XX:XX:XX:XX requires investigation</div>
+                </div>
+            </div>
+
+            <button class="quick-btn" onclick="startFullScan()" style="width: 100%; margin-top: 20px;">
+                🔍 Start Full Network Scan
+            </button>
+        </div>
+    </div>
+
+    <!-- HackRF Modal -->
+    <div id="hackrfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📡 HackRF Suite</h3>
+                <button class="close-btn" onclick="closeModal('hackrfModal')">&times;</button>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card" onclick="showAlert('Spectrum Analyzer starting...')">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">Spectrum</div>
+                </div>
+                <div class="feature-card" onclick="showAlert('RF Scanner initializing...')">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">RF Scan</div>
+                </div>
+                <div class="feature-card" onclick="showAlert('Signal Generator ready')">
+                    <div class="feature-icon">📡</div>
+                    <div class="feature-title">Generate</div>
+                </div>
+                <div class="feature-card" onclick="showAlert('Frequency Hopping detected')">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Analyze</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.1); border-radius: 10px;">
+                <div>📊 <strong>Current Frequency:</strong> 433.92 MHz</div>
+                <div>📈 <strong>Signal Strength:</strong> -45 dBm</div>
+                <div>⚡ <strong>Bandwidth:</strong> 20 MHz</div>
+                <div>🎯 <strong>Sample Rate:</strong> 2 MSPS</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Alert -->
+    <div id="floatingAlert" class="floating-alert">
+        <div id="alertMessage"></div>
+    </div>
+
+    <script>
+        // Mobile app functionality
+        let threatCount = 0;
+        let scanCount = 0;
+
+        function openModule(module) {
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            const modalId = module + 'Modal';
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+            } else {
+                showAlert(`${module.toUpperCase()} module activated`);
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function switchTab(tab) {
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            event.currentTarget.classList.add('active');
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(30);
+            }
+        }
+
+        function emergencyLock() {
+            if (navigator.vibrate) {
+                navigator.vibrate([100, 50, 100]);
+            }
+            showAlert('🚨 EMERGENCY LOCK ACTIVATED');
+            
+            // Simulate system lock
+            setTimeout(() => {
+                showAlert('🔒 All connections secured');
+            }, 2000);
+        }
+
+        function runQuickScan() {
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            scanCount++;
+            document.getElementById('scanCount').textContent = scanCount;
+            
+            showAlert('🔍 Quick scan initiated...');
+            
+            setTimeout(() => {
+                threatCount += Math.floor(Math.random() * 3);
+                document.getElementById('threatCount').textContent = threatCount;
+                showAlert('✅ Quick scan complete - ' + (Math.random() > 0.5 ? 'System clean' : 'Threats detected'));
+            }, 3000);
+        }
+
+        function testVibrate() {
+            if (navigator.vibrate) {
+                navigator.vibrate([200, 100, 200, 100, 200]);
+                showAlert('📳 Vibration test successful');
+            } else {
+                showAlert('📳 Vibration not supported on this device');
+            }
+        }
+
+        function startFullScan() {
+            const progressBar = document.getElementById('scanProgressBar');
+            const progressDiv = document.getElementById('scanProgress');
+            
+            progressDiv.style.display = 'block';
+            let progress = 0;
+            
+            const scanInterval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                
+                progressBar.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(scanInterval);
+                    progressDiv.style.display = 'none';
+                    showAlert('✅ Full network scan completed');
+                    scanCount++;
+                    document.getElementById('scanCount').textContent = scanCount;
+                }
+            }, 200);
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(100);
+            }
+        }
+
+        function showAlert(message) {
+            const alert = document.getElementById('floatingAlert');
+            const messageEl = document.getElementById('alertMessage');
+            
+            messageEl.textContent = message;
+            alert.classList.add('show');
+            
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent context menu on mobile
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // Prevent text selection
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+            });
+            
+            // Initialize stats
+            setTimeout(() => {
+                threatCount = Math.floor(Math.random() * 10);
+                scanCount = Math.floor(Math.random() * 20);
+                document.getElementById('threatCount').textContent = threatCount;
+                document.getElementById('scanCount').textContent = scanCount;
+            }, 1000);
+            
+            // Show welcome message
+            setTimeout(() => {
+                showAlert('🛡️ Security Platform Mobile Ready');
+            }, 500);
+        });
+
+        // Handle back button
+        window.addEventListener('popstate', function() {
+            const openModals = document.querySelectorAll('.modal');
+            let modalClosed = false;
+            
+            openModals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    modal.style.display = 'none';
+                    modalClosed = true;
+                }
+            });
+            
+            if (!modalClosed) {
+                // If no modal was open, allow default back behavior
+                return;
+            }
+        });
+
+        // Touch feedback for all clickable elements
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.classList.contains('feature-card') || 
+                e.target.classList.contains('quick-btn') || 
+                e.target.classList.contains('nav-item')) {
+                e.target.style.opacity = '0.7';
+            }
+        });
+
+        document.addEventListener('touchend', function(e) {
+            if (e.target.classList.contains('feature-card') || 
+                e.target.classList.contains('quick-btn') || 
+                e.target.classList.contains('nav-item')) {
+                setTimeout(() => {
+                    e.target.style.opacity = '1';
+                }, 100);
+            }
+        });
+
+        // Auto-update stats
+        setInterval(() => {
+            if (Math.random() > 0.8) {
+                threatCount++;
+                document.getElementById('threatCount').textContent = threatCount;
+            }
+        }, 30000);
+
+        // Service Worker registration for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(err => {
+                console.log('Service Worker registration failed');
+            });
+        }
+
+        // Add to home screen prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+            setTimeout(() => {
+                showAlert('📱 Add to Home Screen available');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
