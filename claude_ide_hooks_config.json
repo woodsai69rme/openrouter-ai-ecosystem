@@ -1,0 +1,53 @@
+{
+  "ide_integration": {
+    "enabled": true,
+    "openrouter_only": true,
+    "claude_disabled": true,
+    "cost_protection": true
+  },
+  "supported_ides": {
+    "vscode": {
+      "enabled": true,
+      "config_file": ".vscode/settings.json",
+      "hooks": [
+        "code_completion",
+        "error_analysis",
+        "refactoring"
+      ]
+    },
+    "neovim": {
+      "enabled": true,
+      "config_file": "init.lua",
+      "hooks": [
+        "lsp_integration",
+        "code_actions",
+        "diagnostics"
+      ]
+    },
+    "emacs": {
+      "enabled": true,
+      "config_file": ".emacs.d/init.el",
+      "hooks": [
+        "flycheck",
+        "company",
+        "lsp_mode"
+      ]
+    }
+  },
+  "openrouter": {
+    "endpoint": "http://localhost:6969",
+    "models": {
+      "code_completion": "openai/gpt-4o-mini:free",
+      "error_analysis": "microsoft/phi-3-medium-128k-instruct:free",
+      "refactoring": "meta-llama/llama-3.1-70b-instruct:free",
+      "documentation": "openai/gpt-3.5-turbo:free"
+    }
+  },
+  "features": {
+    "auto_complete": true,
+    "error_detection": true,
+    "code_suggestions": true,
+    "documentation_generation": true,
+    "refactoring_hints": true
+  }
+}

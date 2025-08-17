@@ -1,0 +1,51 @@
+{
+  "app": {
+    "name": "Security Platform Mobile",
+    "id": "com.security.platform.mobile",
+    "version": "1.0.0",
+    "description": "Professional security platform with OpenRouter AI integration",
+    "author": "Security Platform Team"
+  },
+  "platforms": {
+    "android": {
+      "targetSdkVersion": 33,
+      "minSdkVersion": 21,
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.VIBRATE",
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_WIFI_STATE"
+      ]
+    },
+    "ios": {
+      "deployment-target": "12.0",
+      "permissions": [
+        "NSCameraUsageDescription",
+        "NSLocationWhenInUseUsageDescription"
+      ]
+    }
+  },
+  "features": {
+    "security_scanner": true,
+    "hackrf_integration": true,
+    "ai_analysis": true,
+    "openrouter_api": true,
+    "real_time_monitoring": true,
+    "offline_mode": true
+  },
+  "build": {
+    "source": "mobile_security_app.html",
+    "output": "mobile_app",
+    "icons": {
+      "android": "icon-android.png",
+      "ios": "icon-ios.png"
+    }
+  },
+  "openrouter": {
+    "api_key": "sk-or-v1-d41d8cd98f00b204e9800998ecf8427e",
+    "base_url": "https://openrouter.ai/api/v1/chat/completions",
+    "cost_limit": 0.00,
+    "free_models_only": true
+  }
+}

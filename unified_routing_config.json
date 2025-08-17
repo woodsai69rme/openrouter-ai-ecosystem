@@ -1,0 +1,17 @@
+{
+  "load_balancer": {
+    "algorithm": "weighted_round_robin",
+    "health_checks": true,
+    "failover": true
+  },
+  "cost_optimization": {
+    "prefer_free_tiers": true,
+    "cost_threshold": 0.01,
+    "auto_switch": true
+  },
+  "quality_routing": {
+    "task_based": true,
+    "performance_tracking": true,
+    "adaptive_weights": true
+  }
+}

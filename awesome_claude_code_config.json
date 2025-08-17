@@ -1,0 +1,121 @@
+{
+  "awesome_claude_code": {
+    "version": "2.0.0",
+    "mode": "openrouter_exclusive",
+    "cost_guarantee": "$0.00",
+    "claude_disabled": true,
+    "integration_complete": true
+  },
+  "system": {
+    "openrouter_endpoint": "http://localhost:6969",
+    "port": 6969,
+    "free_models": 15,
+    "protection_active": true
+  },
+  "components": {
+    "cc_usage_monitor": {
+      "config": ".cc_usage_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Usage monitoring with Claude blocking"
+    },
+    "configuration_explorer": {
+      "config": ".ccexp_config.json", 
+      "enabled": true,
+      "status": "configured",
+      "description": "Interactive configuration discovery"
+    },
+    "claude_code_flow": {
+      "config": ".claude_flow_config.json",
+      "enabled": true,
+      "status": "configured", 
+      "description": "Autonomous code optimization"
+    },
+    "routing_system": {
+      "config": "claude_router_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Advanced model routing with context awareness"
+    },
+    "slash_commands": {
+      "config": ".slash_commands_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Enhanced slash commands with AI integration"
+    },
+    "multi_agent": {
+      "config": "multi_agent_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Multi-agent coordination system"
+    },
+    "real_time_monitor": {
+      "config": ".realtime_monitor_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Real-time token and cost monitoring"
+    },
+    "cclogviewer": {
+      "file": "cclogviewer.html",
+      "enabled": true,
+      "status": "configured",
+      "description": "Conversation log viewer and analyzer"
+    },
+    "claude_squad": {
+      "file": "claude_squad.py",
+      "config": "claude_squad_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "Multi-agent workspace manager"
+    },
+    "ide_hooks": {
+      "file": "claude_ide_hooks.py",
+      "config": "claude_ide_hooks_config.json", 
+      "enabled": true,
+      "status": "configured",
+      "description": "IDE integration for VS Code, Neovim, Emacs"
+    },
+    "claude_hub": {
+      "file": "claude_hub.py",
+      "config": "claude_hub_config.json",
+      "enabled": true,
+      "status": "configured",
+      "description": "GitHub repository integration"
+    }
+  },
+  "security": {
+    "claude_code_blocked": true,
+    "paid_models_blocked": true,
+    "cost_protection": true,
+    "free_only_mode": true
+  },
+  "startup": {
+    "auto_start": [
+      "openrouter_exclusive_system.py",
+      "cc_usage_monitor.py",
+      "realtime_token_dashboard.html"
+    ],
+    "dashboards": [
+      "http://localhost:6969",
+      "realtime_token_dashboard.html", 
+      "enhanced_dashboard_ultimate_6969.html",
+      "cclogviewer.html"
+    ],
+    "tools": [
+      "claude_squad.py",
+      "claude_ide_hooks.py", 
+      "claude_hub.py",
+      "enhanced_slash_commands.py",
+      "claude_code_router_integration.py"
+    ]
+  },
+  "stats": {
+    "total_components": 11,
+    "dashboards": 4,
+    "tools": 5,
+    "config_files": 8,
+    "cost": "$0.00"
+  },
+  "created": "2025-08-15T17:20:00Z",
+  "updated": "2025-08-15T22:30:00Z"
+}

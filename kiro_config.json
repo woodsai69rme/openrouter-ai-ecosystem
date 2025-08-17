@@ -1,0 +1,26 @@
+{
+  "platform": "kiro",
+  "port": 7003,
+  "status": "pending",
+  "executable": "kiro",
+  "description": "Kiro AI platform",
+  "api_keys": {
+    "primary": "KIRO_API_KEY",
+    "secondary": "KIRO_BACKUP_KEY"
+  },
+  "models": [
+    "kiro-base",
+    "kiro-advanced"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.4,
+    "reasoning": 0.5,
+    "creative": 0.6,
+    "general": 0.5
+  }
+}

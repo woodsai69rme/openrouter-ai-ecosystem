@@ -1,0 +1,29 @@
+{
+  "platform": "openrouter",
+  "port": 6969,
+  "status": "active",
+  "executable": "python openrouter_exclusive_system.py",
+  "description": "OpenRouter multi-model access",
+  "api_keys": {
+    "primary": "OPENROUTER_API_KEY",
+    "secondary": "OPENROUTER_BACKUP_KEY"
+  },
+  "models": [
+    "anthropic/claude-3-sonnet",
+    "google/gemini-pro",
+    "meta-llama/llama-3-8b-instruct",
+    "mistralai/mistral-7b-instruct",
+    "openchat/openchat-7b"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.7,
+    "reasoning": 0.7,
+    "creative": 0.7,
+    "general": 0.9
+  }
+}

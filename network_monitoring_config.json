@@ -1,0 +1,12 @@
+{
+  "blocked_domains": [
+    "api.anthropic.com",
+    "claude.ai",
+    "anthropic.com",
+    "console.anthropic.com"
+  ],
+  "monitoring_enabled": true,
+  "alert_on_attempts": true,
+  "log_all_traffic": false,
+  "auto_block_new_threats": true
+}

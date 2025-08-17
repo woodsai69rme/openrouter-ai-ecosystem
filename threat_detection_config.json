@@ -1,0 +1,28 @@
+{
+  "detection_rules": [
+    {
+      "name": "Claude Process Detection",
+      "type": "process",
+      "pattern": "claude",
+      "action": "terminate",
+      "severity": "high"
+    },
+    {
+      "name": "Anthropic Network Access",
+      "type": "network",
+      "pattern": "anthropic.com",
+      "action": "block",
+      "severity": "critical"
+    },
+    {
+      "name": "Environment Variable Tampering",
+      "type": "environment",
+      "pattern": "ANTHROPIC_BASE_URL",
+      "action": "restore",
+      "severity": "high"
+    }
+  ],
+  "alert_threshold": 1,
+  "auto_response": true,
+  "log_all_events": true
+}

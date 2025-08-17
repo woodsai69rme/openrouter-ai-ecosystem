@@ -1,0 +1,27 @@
+{
+  "platform": "qwen",
+  "port": 7002,
+  "status": "pending",
+  "executable": "qwen",
+  "description": "Alibaba Qwen integration",
+  "api_keys": {
+    "primary": "QWEN_API_KEY",
+    "secondary": "QWEN_BACKUP_KEY"
+  },
+  "models": [
+    "qwen-turbo",
+    "qwen-plus",
+    "qwen-max"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.5,
+    "reasoning": 0.8,
+    "creative": 0.6,
+    "general": 0.7
+  }
+}

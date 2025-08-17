@@ -1,0 +1,26 @@
+{
+  "platform": "crush",
+  "port": 7004,
+  "status": "pending",
+  "executable": "crush",
+  "description": "Crush AI system",
+  "api_keys": {
+    "primary": "CRUSH_API_KEY",
+    "secondary": "CRUSH_BACKUP_KEY"
+  },
+  "models": [
+    "crush-creative",
+    "crush-analytical"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.3,
+    "reasoning": 0.4,
+    "creative": 0.9,
+    "general": 0.6
+  }
+}

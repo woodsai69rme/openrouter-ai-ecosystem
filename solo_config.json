@@ -1,0 +1,26 @@
+{
+  "platform": "solo",
+  "port": 7006,
+  "status": "pending",
+  "executable": "solo",
+  "description": "Solo AI assistant",
+  "api_keys": {
+    "primary": "SOLO_API_KEY",
+    "secondary": "SOLO_BACKUP_KEY"
+  },
+  "models": [
+    "solo-assistant",
+    "solo-expert"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.4,
+    "reasoning": 0.5,
+    "creative": 0.5,
+    "general": 0.8
+  }
+}

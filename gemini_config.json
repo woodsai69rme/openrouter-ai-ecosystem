@@ -1,0 +1,27 @@
+{
+  "platform": "gemini",
+  "port": 7001,
+  "status": "pending",
+  "executable": "gemini-cli",
+  "description": "Google Gemini integration",
+  "api_keys": {
+    "primary": "GEMINI_API_KEY",
+    "secondary": "GEMINI_BACKUP_KEY"
+  },
+  "models": [
+    "gemini-pro",
+    "gemini-pro-vision",
+    "gemini-flash"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.6,
+    "reasoning": 0.9,
+    "creative": 0.7,
+    "general": 0.8
+  }
+}

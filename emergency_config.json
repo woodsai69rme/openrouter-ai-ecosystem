@@ -1,0 +1,11 @@
+{
+  "provider": "openrouter",
+  "api_base": "https://openrouter.ai/api/v1",
+  "free_models": [
+    "qwen/qwen-2.5-coder-32b-instruct:free",
+    "google/gemma-2-9b-it:free",
+    "meta-llama/llama-3.1-8b-instruct:free"
+  ],
+  "claude_blocked": true,
+  "cost_guarantee": "$0.00"
+}

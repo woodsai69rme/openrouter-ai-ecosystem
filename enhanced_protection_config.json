@@ -1,0 +1,21 @@
+{
+  "protection_layers": {
+    "hosts_file_blocking": true,
+    "environment_variable_override": true,
+    "network_level_blocking": true,
+    "process_monitoring": true,
+    "registry_blocking": true
+  },
+  "monitoring": {
+    "check_interval": 5,
+    "alert_on_claude_access": true,
+    "log_all_attempts": true,
+    "auto_terminate_claude": true
+  },
+  "emergency_contacts": [
+    "system_admin",
+    "emergency_response_team"
+  ],
+  "protection_status": "MAXIMUM",
+  "last_updated": "2025-08-14T15:45:46.826908"
+}

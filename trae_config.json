@@ -1,0 +1,26 @@
+{
+  "platform": "trae",
+  "port": 7005,
+  "status": "pending",
+  "executable": "trae",
+  "description": "Trae AI platform",
+  "api_keys": {
+    "primary": "TRAE_API_KEY",
+    "secondary": "TRAE_BACKUP_KEY"
+  },
+  "models": [
+    "trae-general",
+    "trae-specialized"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.3,
+    "reasoning": 0.4,
+    "creative": 0.8,
+    "general": 0.5
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "squad": {
+    "name": "OpenRouter Squad",
+    "version": "1.0.0",
+    "max_agents": 20,
+    "max_workspaces": 10,
+    "cost_protection": true
+  },
+  "openrouter": {
+    "endpoint": "http://localhost:6969",
+    "models": {
+      "architect": "meta-llama/llama-3.1-70b-instruct:free",
+      "developer": "openai/gpt-4o-mini:free",
+      "tester": "google/gemma-2-9b-it:free",
+      "reviewer": "microsoft/phi-3-medium-128k-instruct:free",
+      "documenter": "openai/gpt-3.5-turbo:free",
+      "debugger": "mistralai/mistral-7b-instruct:free",
+      "optimizer": "meta-llama/llama-3.1-8b-instruct:free",
+      "analyst": "nousresearch/nous-capybara-7b:free"
+    }
+  },
+  "workspace_templates": {
+    "web_development": {
+      "agents": [
+        "architect",
+        "developer",
+        "tester",
+        "reviewer"
+      ],
+      "capabilities": [
+        "frontend",
+        "backend",
+        "testing",
+        "deployment"
+      ]
+    },
+    "data_analysis": {
+      "agents": [
+        "analyst",
+        "developer",
+        "tester"
+      ],
+      "capabilities": [
+        "data_processing",
+        "visualization",
+        "modeling"
+      ]
+    },
+    "devops": {
+      "agents": [
+        "architect",
+        "developer",
+        "optimizer"
+      ],
+      "capabilities": [
+        "infrastructure",
+        "automation",
+        "monitoring"
+      ]
+    }
+  },
+  "coordination": {
+    "auto_assign": true,
+    "load_balance": true,
+    "max_concurrent_tasks": 5,
+    "task_timeout": 1800
+  }
+}

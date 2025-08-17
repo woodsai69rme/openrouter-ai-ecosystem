@@ -1,0 +1,26 @@
+{
+  "platform": "claude_code",
+  "port": 6969,
+  "status": "active",
+  "executable": "claude",
+  "description": "Primary Claude Code integration",
+  "api_keys": {
+    "primary": "CLAUDE_CODE_API_KEY",
+    "secondary": "CLAUDE_CODE_BACKUP_KEY"
+  },
+  "models": [
+    "claude-3-sonnet",
+    "claude-3-haiku"
+  ],
+  "cost_limits": {
+    "daily": 0.0,
+    "monthly": 0.0,
+    "emergency_stop": true
+  },
+  "routing_weights": {
+    "coding": 0.8,
+    "reasoning": 0.6,
+    "creative": 0.4,
+    "general": 0.7
+  }
+}
