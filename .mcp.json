@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-filesystem",
+        "X:\\GITHUBREPO"
+      ],
+      "type": "stdio"
+    },
+    "openrouter": {
+      "command": "python",
+      "args": [
+        "X:\\GITHUBREPO\\openrouter_mcp_server.py"
+      ],
+      "type": "stdio",
+      "env": {
+        "OPENROUTER_API_KEY": "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"
+      }
+    }
+  }
+}
